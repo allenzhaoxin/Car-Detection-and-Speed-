@@ -21,9 +21,13 @@ flag=True
 
 start=end=0
 time_diff=0
-while True:
-    ret, img = cap.read()
-    height,width,chan=img.shape
+ret, img = cap.read()
+while ret:
+    try:
+        height,width,chan=img.shape
+    except AttributeError:
+        print(ret)
+        break
     if img.shape[0]>480:
         scale_percent = 50 
         width = int(img.shape[1] * scale_percent / 100) 
@@ -101,4 +105,5 @@ while True:
         newdf=pd.DataFrame({'ID':ID,'Time':TIME,'Velocity':VEL,'E-Mail':EMail,'Phone':Phone})
         newdf.to_csv('Defaulters.csv')
         break
+    ret, img = cap.read()
 cv2.destroyAllWindows()
