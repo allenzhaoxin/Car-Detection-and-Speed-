@@ -79,7 +79,7 @@ while ret:
         s_flag=False
 
       
-        if vel_kmph>85:
+        if vel_kmph>60:
             TIME.append(str(datetime.datetime.now()))
             VEL.append(vel_kmph)
             '''
@@ -99,11 +99,11 @@ while ret:
     #cv2.imwrite('messigray.png',c)
     key = cv2.waitKey(1) & 0xFF
     if key == ord("q"):
-        EMail=['emailexample@gmail.com']*len(VEL)
-        Phone=["989909xxxx"]*len(VEL)
-        ID=['UK07-'+str(i) for i in range(0,len(VEL))]
-        newdf=pd.DataFrame({'ID':ID,'Time':TIME,'Velocity':VEL,'E-Mail':EMail,'Phone':Phone})
-        newdf.to_csv('Defaulters.csv')
         break
     ret, img = cap.read()
+EMail=['emailexample@gmail.com']*len(VEL)
+Phone=["989909xxxx"]*len(VEL)
+ID=['UK07-'+str(i) for i in range(0,len(VEL))]
+newdf=pd.DataFrame({'ID':ID,'Time':TIME,'Velocity':VEL,'E-Mail':EMail,'Phone':Phone})
+newdf.to_csv('Defaulters.csv')
 cv2.destroyAllWindows()
